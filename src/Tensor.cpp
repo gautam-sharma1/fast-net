@@ -101,6 +101,8 @@ inline constexpr size_t Tensor<T>::GetSize() const
     return this->SIZE;
 }
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
 
@@ -109,7 +111,7 @@ inline constexpr size_t Tensor<T>::GetSize() const
 template <class T>
 T Tensor<T>::dot(const Tensor &t1)
 {
-    //cout<<this->SIZE << " "<<  t1.SIZE<<endl;
+    cout<<this->SIZE << " "<<  t1.SIZE<<endl;
     assert(this->SIZE == t1.SIZE);
     return std::inner_product(std::begin(this->_Tensor), std::end(this->_Tensor), std::begin(t1.GetTensor()), (decltype(t1(1)))0.0);
 }

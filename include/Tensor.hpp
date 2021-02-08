@@ -55,6 +55,17 @@ public:
     inline void operator+(const Tensor &t1);
 
     /**
+    helps index a tensor from vector of tensors
+    @param vector vector of tensors that you want to access 
+    @param position index of the tensor you want to access from a vector o tensors
+    @return tensor at the given position
+*/
+
+static inline constexpr T get(const std::vector<T>& vec , const int &position){
+    return vec.at(position);
+}
+ 
+    /**
     Overloads the - operator
     @param t1 Tensor to subtract from the current tensor
     @return Modified tensor 

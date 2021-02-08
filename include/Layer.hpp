@@ -19,58 +19,52 @@ class Layer
 {
 public:
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    Conctructs a laer of a neural network
+    @param rows number of neurons in the network
+    @param cols equals the shape of the previous input
+    @return constructs a layer object
 */
     explicit Layer(int rows, int cols);
 
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    overloads the () operator
+    @param position index of the row you want to index
+    @return Tensor at the position
 */
     const FastNet::Tensor::Tensor<float> &operator()(const int &position) const;
 
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    Prints the layer weights to the console
+    @param None
+    @return None
 */
     const void Print() const;
 
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    Implements a dot product b/w a vector of tensor and the current layer
+    @param t1 vector of Tensors
+    @return vector of Tensors after the dot product
 */
-    FastNet::Tensor::Tensor<float> dot(std::vector<FastNet::Tensor::Tensor<float>> t1); // returns a tensor
+    std::vector<FastNet::Tensor::Tensor<float>> dot(std::vector<FastNet::Tensor::Tensor<float>> t1); // returns a tensor
 
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    Return number of rows
+    @param None
+    @return gets the rows
 */
     inline size_t GetRows() const;
 
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    Return number of columns
+    @param None
+    @return gets the columns
 */
     inline constexpr size_t GetCols() const;
 
     /**
-    Encodes a single digit of a POSTNET "A" bar code.
-    @param digit the single digit to encode.
-    @return a bar code of the digit using "|" as the long bar
-    and "," as the half bar.
+    Return the weights
+    @param None
+    @return weights of the layer
 */
     inline std::vector<FastNet::Tensor::Tensor<float>> GetWeights() const;
 

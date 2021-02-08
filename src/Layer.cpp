@@ -16,7 +16,9 @@ using namespace FastNet::Layer;
 using namespace FastNet::Tensor;
 using Tensorf = FastNet::Tensor::Tensor<float>;
 
+
 class Tensor;
+
 Layer::Layer(int rows, int cols) : _Rows{rows}, _Cols{cols}
 {
     for (int i = 0; i < this->_Rows; i++)
@@ -26,7 +28,7 @@ Layer::Layer(int rows, int cols) : _Rows{rows}, _Cols{cols}
         {
             tmp.push_back((float)rand() / (RAND_MAX));
         }
-        FastNet::Tensor::Tensor<float> _T{tmp}; // constructs a Tensor
+        Tensorf _T{tmp}; // constructs a Tensor
         _Weights.push_back(_T);                 // Pushes back the Tensor to make a single row
     }
 
@@ -61,26 +63,46 @@ std::vector<Tensorf> Layer::GetWeights() const
 {
     return this->_Weights;
 }
-Tensorf Layer::dot(std::vector<Tensorf> t1) // // returns a tensor
+
+
+vector<Tensorf> Layer::dot(std::vector<Tensorf> t1) // // returns a tensor
 
 {
-    int sz = t1[0].GetTensor().size();
+    int cols_input = t1[0].GetTensor().size(); // columns of input tensor
+    int num_examples = t1.size(); // number of examples in our input or number of rows 
+    cout<<num_examples<<endl;
+    cout<<cols_input<<endl;
     //cout<<sz<<endl;
-    assert(sz == this->_Rows); // chech if colum of 1st matrix = rows of second matrix
-    std::vector<float> tensor;
-    for (int i = this->_Rows - 1; i >= 0; i--)
-    {
+    assert(cols_input == this->_Cols); // chech if column of input = rows of second matrix
 
-        auto row = t1.back();
-        t1.pop_back();
-        row.Print();
-        this->_Weights[i].Print();
-        auto tmp = (this->_Weights[i]).dot(row);
-        tensor.push_back(tmp);
+    vector<Tensorf> result;
+    
+    //for (int i = 0; i<num_examples; i++){
+        // auto row = t1.back();
+        // t1.pop_back();
+        for (int j=this->_Rows-1; j >=0; j--)
+        {    std::vector<float> tensor;  // temperory vector that holds the tensor
+            
+            for (int i=0;i<num_examples;i++){
+            auto row  = t1.at(i); 
 
-    }
-    std::reverse(tensor.begin(), tensor.end());
-    tensor.resize(_Rows);
+            
+            //t1.pop_back();
+            row.Print();
+            this->_Weights[j].Print();
+            auto tmp = (this->_Weights[j]).dot(row);
+            tensor.push_back(tmp);
+            }
+
+        
+
+    //std::reverse(tensor.begin(), tensor.end());
+    tensor.resize(num_examples);
     Tensorf t{tensor};
-    return t;
+    result.push_back(t);
+    }
+    //std::reverse(result.begin(), result.end());
+    //result.resize(num_examples);
+    return result;
+
 }
