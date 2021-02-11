@@ -55,17 +55,6 @@ int main()
     cout << y4.Sum() << endl;
 
     // assuming a matrix
-    // [1 1 1 0]
-    // [2 2 2 0]
-    // [3 3 3 0]
-    // [4 4 4 0]
-    // Vectorf input1 = {1, 2, 3, 4};
-    // Vectorf input2 = {1, 2, 3, 4};
-    // Vectorf input3 = {1, 2, 3, 4};
-    // Vectorf input4 = {0, 0, 0, 0};
-    // col1, col2, col3 ,col4
-    // vector<Tensorf> t1{input1, input2, input3, input4};
-    // Layer l2{4, 4};
     Vectorf input1 = {1, 2, 3};
     Vectorf input2 = {4, 5, 6};
     Vectorf input3 = {7, 8, 9};
@@ -80,10 +69,7 @@ int main()
     (layer1.at(2)).Print();
     (layer1.at(3)).Print();
     (layer1.at(4)).Print();
-    // (layer1.at(1)).Print();
-    // (layer1.at(2)).Print();
 
-    // l2.Print();
     Layer l2{10, 3}; //  5 by 3
     auto tt = l2.dot(layer1);
     (tt.at(0)).Print();
@@ -103,14 +89,5 @@ int main()
     Vectorf temp4 = {-1, -1, -2, -3, 5, 6};
     Tensorf ttt{temp4};
     relu(ttt).Print();
-    // y1 = sigmoid(temp);
-    // y1.Print();
-    // cout << "Final answer is:" << endl;
-    // tt.Print();
 
-    // vector<Tensorf> t3{tt};
-    // Layer l1{1,4};
-    // auto tt2 = l1.dot(t3);
-    // cout << "Final answer is:" << endl;
-    // tt2.Print();
 }
